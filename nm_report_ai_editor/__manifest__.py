@@ -37,6 +37,7 @@ Solo los administradores pueden usar el editor.
     'data': [
         # 'security/ir.model.access.csv',
         'views/res_config_settings_views.xml',
+        'views/nm_report_ai_wizard_views.xml',
     ],
     'installable': True,
     'application': True,

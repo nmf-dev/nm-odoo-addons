@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="nm_report_ai_wizard_view_form" model="ir.ui.view">
+        <field name="name">nm.report.ai.wizard.form</field>
+        <field name="model">nm.report.ai.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Editar informe con IA">
+                <field name="state" invisible="1"/>
+                <group>
+                    <field name="report_id" options="{'no_create': True}"
+                           readonly="state != 'draft'"/>
+                    <field name="instruction" readonly="state != 'draft'"
+                           placeholder="Ej.: pon el logo a la derecha y añade una columna de descuento"/>
+                </group>
+                <group invisible="state == 'draft'">
+                    <field name="view_id"/>
+                    <field name="result_xml" widget="ace" options="{'mode': 'xml'}"/>
+                </group>
+                <footer>
+                    <button name="action_generate" string="Generar" type="object"
+                            class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_apply" string="Aplicar" type="object"
+                            class="btn-primary" invisible="state != 'generated'"/>
+                    <button name="action_back" string="Cambiar instrucciones" type="object"
+                            invisible="state != 'generated'"/>
+                    <button string="Cerrar" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="nm_report_ai_wizard_action" model="ir.actions.act_window">
+        <field name="name">Editar informe con IA</field>
+        <field name="res_model">nm.report.ai.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="nm_report_ai_menu_root" name="Informes IA"
+              sequence="90" groups="base.group_system"/>
+    <menuitem id="nm_report_ai_menu_editor" name="Editor"
+              parent="nm_report_ai_menu_root"
+              action="nm_report_ai_wizard_action" sequence="10"/>
+</odoo>
