@@ -37,7 +37,8 @@
     </record>
 
     <menuitem id="nm_report_ai_menu_root" name="Informes IA"
-              sequence="90" groups="base.group_system"/>
+          sequence="90" groups="base.group_system"
+          web_icon="nm_report_ai_editor,static/description/icon.png"/>
     <menuitem id="nm_report_ai_menu_editor" name="Editor"
               parent="nm_report_ai_menu_root"
               action="nm_report_ai_wizard_action" sequence="10"/>
