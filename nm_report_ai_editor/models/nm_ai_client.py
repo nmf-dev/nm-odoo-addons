@@ -18,12 +18,10 @@ class NmAiClient(models.AbstractModel):
     def _get_config(self):
         """Lee la configuración guardada en Ajustes."""
         params = self.env["ir.config_parameter"].sudo()
-        api_key = (params.get_param("nm_report_ai_editor.api_key") or "").strip()
-        model = params.get_param("nm_report_ai_editor.model") or "claude-sonnet-5-5"
-        try:
-            timeout = int(params.get_param("nm_report_ai_editor.timeout") or 60)
-        except ValueError:
-            timeout = 60
+        api_key = params.get_str("nm_report_ai_editor.api_key").strip()
+        model = params.get_str("nm_report_ai_editor.model") or "claude-sonnet-5-5"
+        timeout = params.get_int("nm_report_ai_editor.timeout") or 60
+        
         return api_key, model, timeout
 
     def complete(self, system, user, max_tokens=4096):
